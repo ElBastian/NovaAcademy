@@ -1,0 +1,97 @@
+.admin { padding-top: 40px; padding-bottom: 60px; }
+.admin h1 { font-size: 30px; font-weight: 700; }
+
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.admin-tabs a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 999px;
+    font-weight: 500;
+}
+.admin-tabs a:hover { border-color: var(--primario); color: var(--primario); }
+.admin-tabs a.activo { background: var(--primario); border-color: var(--primario); color: #fff; }
+.admin-contador {
+    background: var(--error-texto);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 12px;
+    padding: 1px 8px;
+}
+
+.admin-tarjeta {
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px var(--sombra);
+    overflow-x: auto;
+}
+.admin-form h2 { font-size: 20px; }
+.admin-vacio { color: var(--texto-suave); text-align: center; padding: 20px 0; }
+
+.admin-tabla { width: 100%; border-collapse: collapse; }
+.admin-tabla th, .admin-tabla td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--borde);
+    white-space: nowrap;
+}
+.admin-tabla th { color: var(--texto-suave); font-weight: 500; font-size: 14px; }
+.admin-tabla tr:last-child td { border-bottom: none; }
+.admin-acciones { text-align: right; }
+.admin-acciones form { display: inline-flex; gap: 8px; }
+.admin-inline { display: inline; }
+
+.campo select, .campo textarea, .admin-tabla select {
+    font: inherit;
+    padding: 8px 10px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 8px;
+    background: var(--fondo);
+    color: var(--texto);
+}
+.campo textarea { resize: vertical; }
+
+.btn-mini {
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--borde-fuerte);
+    background: transparent;
+    color: var(--texto);
+    cursor: pointer;
+}
+.btn-mini.exito { border-color: #1f8a5b; color: #2fb37a; }
+.btn-mini.exito:hover { background: #1f8a5b; color: #fff; }
+.btn-mini.peligro { border-color: var(--error-texto); color: var(--error-texto); }
+.btn-mini.peligro:hover { background: var(--error-fondo); }
+
+.etiqueta {
+    margin-left: 6px;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--error-fondo);
+    color: var(--error-texto);
+}
+
+.admin-subtitulo { font-size: 22px; font-weight: 700; margin-top: 10px; }
+.etiqueta-rol {
+    margin-left: 6px;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--primario-suave);
+    color: var(--primario);
+}
