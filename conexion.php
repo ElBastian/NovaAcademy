@@ -35,6 +35,8 @@ function conexion() {
     } catch (PDOException $e) {
         error_log("Error de conexión: " . $e->getMessage());
         http_response_code(500);
-        die("No se pudo conectar a la base de datos. Intenta más tarde.");
+        // DIAGNOSTICO TEMPORAL
+        $msg = preg_replace('/password=\S+/', 'password=***', $e->getMessage());
+        die("No se pudo conectar a la base de datos. [env=" . ($url ? "si" : "no") . " host=$host db=$baseDatos] " . htmlspecialchars($msg));
     }
 }
