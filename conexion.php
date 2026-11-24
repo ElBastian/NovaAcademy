@@ -37,6 +37,6 @@ function conexion() {
         http_response_code(500);
         // DIAGNOSTICO TEMPORAL
         $msg = preg_replace('/password=\S+/', 'password=***', $e->getMessage());
-        die("No se pudo conectar a la base de datos. [env=" . ($url ? "si" : "no") . " host=$host db=$baseDatos] " . htmlspecialchars($msg));
+        die("No se pudo conectar a la base de datos. [env=" . ($url ? "si" : "no") . " shell=" . (file_exists("/tmp/dburl_set") ? "si" : "no") . " host=$host db=$baseDatos] " . htmlspecialchars($msg));
     }
 }

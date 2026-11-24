@@ -15,6 +15,8 @@ EXPOSE 10000
 
 # Al arrancar: aplica usuarios.sql (es idempotente) y levanta Apache en $PORT
 CMD if [ -n "$DATABASE_URL" ]; then \
+        echo "PassEnv DATABASE_URL" > /etc/apache2/conf-enabled/db-env.conf; \
+        touch /tmp/dburl_set; \
         psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -q -f /var/www/html/usuarios.sql \
         || echo "AVISO: no se pudo aplicar usuarios.sql"; \
     fi \
