@@ -1,4 +1,5 @@
-.env
-.git
 Dockerfile
 .dockerignore
+.git
+.env
+render.yaml

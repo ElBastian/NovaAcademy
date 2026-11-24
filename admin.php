@@ -65,6 +65,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $msg = "Escribe un título y elige una categoría.";
             }
             break;
+        case "asignar_ponente":
+            $ponente = (int) ($_POST["ponente_id"] ?? 0);
+            // Solo cursos sin ponente y solo ponentes activos.
+            $q = $con->prepare("UPDATE cursos SET ponente_id = ?
+                                WHERE id = ? AND ponente_id IS NULL AND eliminado_en IS NULL
+                                  AND EXISTS (SELECT 1 FROM usuarios WHERE id = ? AND rol = 'ponente' AND estado = 'activo')");
+            $q->execute([$ponente, $id, $ponente]);
+            $msg = $q->rowCount() ? "Ponente asignado." : "No se pudo asignar el ponente.";
+            break;
         case "eliminar_curso":
             $con->prepare("DELETE FROM cursos WHERE id = ?")->execute([$id]);
             $msg = "Curso eliminado.";
@@ -298,7 +307,26 @@ $token = e($_SESSION["token"]);
                     <tr>
                         <td><?= e($f["titulo"]) ?></td>
                         <td><?= e($f["categoria"]) ?></td>
-                        <td><?= $f["nombre"] ? e($f["nombre"] . " " . $f["apellidos"]) : "Sin asignar" ?></td>
+                        <td>
+                            <?php if ($f["nombre"]): ?>
+                                <?= e($f["nombre"] . " " . $f["apellidos"]) ?>
+                            <?php elseif (!$ponentes): ?>
+                                Sin asignar
+                            <?php else: ?>
+                                <form method="post" class="admin-asignar">
+                                    <input type="hidden" name="token" value="<?= $token ?>">
+                                    <input type="hidden" name="accion" value="asignar_ponente">
+                                    <input type="hidden" name="id" value="<?= $f["id"] ?>">
+                                    <select name="ponente_id" required aria-label="Ponente">
+                                        <option value="">Sin asignar</option>
+                                        <?php foreach ($ponentes as $p): ?>
+                                            <option value="<?= $p["id"] ?>"><?= e($p["nombre"] . " " . $p["apellidos"]) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <button class="btn-mini exito">Asignar</button>
+                                </form>
+                            <?php endif; ?>
+                        </td>
                         <td class="admin-acciones">
                             <a href="curso.php?id=<?= $f["id"] ?>" class="btn-mini">Editar contenido y comentar</a>
                             <form method="post" onsubmit="return confirm('¿Eliminar este curso?')">

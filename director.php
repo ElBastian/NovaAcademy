@@ -58,8 +58,7 @@ $token = e($_SESSION["token"]);
 $totales = $con->query("SELECT
         (SELECT COUNT(*) FROM usuarios WHERE rol = 'alumno')  AS alumnos,
         (SELECT COUNT(*) FROM usuarios WHERE rol = 'ponente' AND estado = 'activo') AS ponentes,
-        (SELECT COUNT(*) FROM cursos WHERE eliminado_en IS NULL) AS cursos,
-        (SELECT COUNT(*) FROM cursos WHERE eliminado_en IS NULL AND ponente_id IS NULL) AS sin_ponente")->fetch();
+        (SELECT COUNT(*) FROM cursos WHERE eliminado_en IS NULL) AS cursos")->fetch();
 
 $cursos = $con->query("SELECT c.id, c.titulo, c.categoria, u.nombre, u.apellidos,
                               (SELECT COUNT(*) FROM comentarios_curso k WHERE k.curso_id = c.id AND NOT k.atendido) AS comentarios
@@ -142,11 +141,10 @@ $cambiosPonentes = $con->query("SELECT autor, rol, descripcion, creado_en FROM c
     </section>
 
     <section class="panel-seccion">
-        <div class="grid-stats">
+        <div class="grid-stats grid-stats-3">
             <div class="stat"><b><?= (int) $totales["alumnos"] ?></b><span>Alumnos</span></div>
             <div class="stat"><b><?= (int) $totales["ponentes"] ?></b><span>Ponentes</span></div>
             <div class="stat"><b><?= (int) $totales["cursos"] ?></b><span>Cursos</span></div>
-            <div class="stat"><b><?= (int) $totales["sin_ponente"] ?></b><span>Cursos sin ponente</span></div>
         </div>
     </section>
 

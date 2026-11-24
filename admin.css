@@ -50,6 +50,7 @@
 .admin-acciones { text-align: right; }
 .admin-acciones form { display: inline-flex; gap: 8px; }
 .admin-inline { display: inline; }
+.admin-asignar { display: inline-flex; gap: 8px; align-items: center; }
 
 .campo select, .campo textarea, .admin-tabla select {
     font: inherit;

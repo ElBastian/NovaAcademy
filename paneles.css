@@ -84,6 +84,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+.grid-stats-3 { grid-template-columns: repeat(3, 1fr); }
 .stat {
     background: var(--superficie);
     border: 1px solid var(--borde);
@@ -183,9 +184,11 @@
 
 @media (max-width: 1024px) {
     .grid-stats { grid-template-columns: repeat(2, 1fr); }
+    .grid-stats-3 { grid-template-columns: repeat(3, 1fr); }
     .grid-doble { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
+    .grid-stats-3 { grid-template-columns: 1fr; }
     .panel-hero {
         min-height: 260px;
         background:
